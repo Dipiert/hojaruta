@@ -16,8 +16,8 @@ function storeItem() {
 
 function store($conn, $sql) {
     if (!mysqli_query($conn, $sql)) {
-        echo "Ocurrio un error con la consulta: " . $sql . PHP_EOL;
+        echo nl2br("Ocurrio un error con la consulta: " . $sql . "\n");
     } else {
-        echo "Se ha insertado un nuevo registro correctamente" . PHP_EOL;
+        echo nl2br("Se ha insertado un nuevo registro correctamente\n");
     }
 }
