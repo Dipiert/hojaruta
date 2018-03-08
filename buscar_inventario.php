@@ -1,13 +1,18 @@
 <?php
 require_once("DB.php");
-echo getBiblioData($_POST['barcode']);
+echo getBiblioData();
 
-function getBiblioData($barcode = '000307') {    
+function getBiblioData() {  
+    $stockNumber = $_POST['stockNumber'];  
     $db = new DB;
     $conn = $db->getConnection();
-    $query = 'SELECT b.author, b.title
-              FROM biblio b, items i
-              WHERE i.barcode =\'' . $barcode . '\' AND b.biblionumber = i.biblionumber;';
+    $query = 'SELECT i.autor, i.titulo, e.estado
+            FROM item i
+            INNER JOIN estado_item ei
+            INNER JOIN estado e
+            ON i.nro_inventario=ei.nro_inventario
+            AND e.id_estado=ei.nro_inventario
+            WHERE i.nro_inventario =' . $stockNumber;
     $result = mysqli_query($conn, $query);
     if (!$result) {
         mysqli_error($conn);
@@ -19,7 +24,8 @@ function getBiblioData($barcode = '000307') {
 
 function prepareResponse($result) {
     $row = mysqli_fetch_assoc($result);
-    $author = utf8_encode($row['author']);
-    $title = utf8_encode($row['title']);
-    return json_encode(Array ("author" => $author, "title" => $title));
+    $author = utf8_encode($row['autor']);
+    $title = utf8_encode($row['titulo']);
+    $state = utf8_encode($row['estado']);
+    return json_encode(Array ("author" => $author, "title" => $title, "state" => $state));
 }

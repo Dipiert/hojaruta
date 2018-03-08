@@ -9,15 +9,23 @@ function storeItem() {
     $author = mysqli_real_escape_string($conn, $_POST['author']);
     $title = mysqli_real_escape_string($conn, $_POST['title']); 
     $sql = 'INSERT INTO item VALUES' . "('$author', '$title', $stockNumber);";
-    store($conn, $sql);
-    $sql = 'INSERT INTO estado_item VALUES' . "($stockNumber, 0)";
-    store($conn, $sql);
+    if (store($conn, $sql)) {
+        $sql = 'INSERT INTO estado_item VALUES' . "($stockNumber, 0)";
+        if(store($conn, $sql));     {
+            echo nl2br("Se ha registrado el item correctamente");
+        }
+    }
 }
 
 function store($conn, $sql) {
+    define('MYSQL_CODE_DUPLICATE_KEY',1062);    
     if (!mysqli_query($conn, $sql)) {
-        echo nl2br("Ocurrio un error con la consulta: " . $sql . "\n");
+        if (mysqli_errno($conn) == MYSQL_CODE_DUPLICATE_KEY) {            
+            echo nl2br("El número de inventario cargado ya existe");
+        } else {
+            echo nl2br("Ocurrio un error con la consulta SQL");
+        }        
     } else {
-        echo nl2br("Se ha insertado un nuevo registro correctamente\n");
+        return true;
     }
 }
