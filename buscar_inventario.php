@@ -11,8 +11,9 @@ function getBiblioData() {
             INNER JOIN estado_item ei
             INNER JOIN estado e
             ON i.nro_inventario=ei.nro_inventario
-            AND e.id_estado=ei.nro_inventario
+            AND e.id_estado=ei.id_estado
             WHERE i.nro_inventario =' . $stockNumber;
+    
     $result = mysqli_query($conn, $query);
     if (!$result) {
         mysqli_error($conn);

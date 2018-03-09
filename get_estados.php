@@ -5,7 +5,7 @@ echo getStates();
 function getStates() {
 	$db = new DB;
     $conn = $db->getConnection();
-	$query = "SELECT estado FROM estado";
+	$query = "SELECT estado, id_estado FROM estado";
 	$result = mysqli_query($conn, $query);
 	if (!$result) {
         mysqli_error($conn);
@@ -18,7 +18,7 @@ function getStates() {
 function prepareResponse($result) {
     $states = [];
     while ($row = mysqli_fetch_assoc($result)) {
-    	array_push($states, utf8_encode($row['estado']));
+    	$states += [utf8_encode($row['estado']) => $row['id_estado']];
     }
-    return json_encode(Array ("states" => $states));	
+    return json_encode($states);	
 }
