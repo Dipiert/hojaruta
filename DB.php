@@ -4,7 +4,7 @@ class DB {
    private $_connection;
 
    public function __construct() {
-      $conf = require_once('DBConfig.php');
+      $conf = require_once('config/DBConfig.php');
       $this->_connection = new mysqli(
                            $conf["server"],
                            $conf["user"],

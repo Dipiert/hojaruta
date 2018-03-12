@@ -1,3 +1,7 @@
+<?php
+include ('includes/login_required.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

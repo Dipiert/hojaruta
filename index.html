@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inicio de Sesión</title>
+	<meta charset="utf-8">
+	<meta description="Hoja de Ruta - Login">
+	<meta author="Damián Rotta">
+	<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+</head>
+<body>
+<form action="verificar_usuario.php" method="POST">
+	<p>
+		<label>Usuario:</label>
+		<input type="text" id="user">
+	</p>
+	<p>
+		<label>Contraseña:</label>
+		<input type="password" id="password">
+	</p>
+	<p>
+		<input type="submit" id="sendLoginData" value="Ingresar">
+	</p>
+	<div id="loginError"></div>
+</form>
+</body>
+</html>
+
+<script type="text/javascript">
+	$('#sendLoginData').click(function() {
+		var user = $('#user').val();
+		var password = $('#password').val();
+		$.ajax({
+			type: 'POST',
+			url: 'verificar_usuario.php',
+			async: false,
+			data: {
+				'user': user,
+				'password': password
+			},
+			success: function() {
+				$('#loginError').empty();
+				$('#loginError').append("error");
+			}
+		});
+	})
+</script>
