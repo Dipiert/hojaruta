@@ -36,7 +36,7 @@ $("#searchStockNumber").click(function() {
 	
 	var defStates = $.ajax({
 		type: 'GET',
-		url: 'get_estados.php',
+		url: 'ajax/get_estados.php',
 		async: false,
 		cache: false,
 		error: function(error) {
@@ -45,12 +45,12 @@ $("#searchStockNumber").click(function() {
 	});
 
 	var defBiblio = $.ajax({
-		url: 'buscar_inventario.php',
+		url: 'ajax/buscar_inventario.php',
 		type: 'POST',
 		async: false,
 		data: {stockNumber: stockNumber},
 		success: function(data) {
-			console.log(data);
+			//console.log(data);
 		},
 		error: function(error) {
   			console.log(error);
@@ -62,7 +62,7 @@ $("#searchStockNumber").click(function() {
 })
 
 function showResult(defStates, defBiblio) {
-	var biblioData = JSON.parse(defBiblio[0]);
+	biblioData = JSON.parse(defBiblio[0]);
 	showBiblioData(biblioData['author'], biblioData['title']);
 	showStates(JSON.parse(defStates[0]), biblioData['state']);	
 	$("#changeStatus").css("visibility", "visible");
@@ -102,10 +102,18 @@ $("#changeStatus").click(function() {
 	var newState = $('#statesSelect option:selected').val();
 	var stockNumber = $("#stockNumber").val();
 	$.ajax({
-		url: 'actualizar_estados.php',
+		url: 'ajax/actualizar_estados.php',
 		type: 'POST',
-		data: { newState: newState, stockNumber: stockNumber},
+		data: { newState: newState,
+				stockNumber: stockNumber,
+				oldState: biblioData['state'],
+			  },
+		success: function(data) {
+			console.log(data);		
+		}
+
 	});
+	
 	alert("Se ha actualizado el estado correctamente");
 	location.reload();
 });

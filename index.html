@@ -15,36 +15,16 @@
 <form action="verificar_usuario.php" method="POST">
 	<p>
 		<label>Usuario:</label>
-		<input type="text" id="user">
+		<input type="text" name="user">
 	</p>
 	<p>
 		<label>Contraseña:</label>
-		<input type="password" id="password">
+		<input type="password" name="password">
 	</p>
 	<p>
 		<input type="submit" id="sendLoginData" value="Ingresar">
 	</p>
-	<div id="loginError"></div>
+
 </form>
 </body>
 </html>
-
-<script type="text/javascript">
-	$('#sendLoginData').click(function() {
-		var user = $('#user').val();
-		var password = $('#password').val();
-		$.ajax({
-			type: 'POST',
-			url: 'verificar_usuario.php',
-			async: false,
-			data: {
-				'user': user,
-				'password': password
-			},
-			success: function() {
-				$('#loginError').empty();
-				$('#loginError').append("error");
-			}
-		});
-	})
-</script>

@@ -1,7 +1,7 @@
 <?php
 
-include ('includes/login_required.php');
-require_once("DB.php");
+include ('../includes/login_required.php');
+require_once("../DB.php");
 echo getStates();
 
 function getStates() {
