@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-03-2018 a las 09:35:14
+-- Tiempo de generación: 15-03-2018 a las 12:06:53
 -- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
 -- Versión de PHP: 7.1.12-1+ubuntu16.04.1+deb.sury.org+1
 
@@ -19,6 +19,17 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `hojaruta`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `autores`
+--
+
+CREATE TABLE `autores` (
+  `id` smallint(5) UNSIGNED NOT NULL,
+  `autor` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -83,6 +94,12 @@ CREATE TABLE `usuarios` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `autores`
+--
+ALTER TABLE `autores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `estado`
