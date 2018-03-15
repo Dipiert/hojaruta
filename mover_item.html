@@ -49,9 +49,6 @@ $("#searchStockNumber").click(function() {
 		type: 'POST',
 		async: false,
 		data: {stockNumber: stockNumber},
-		success: function(data) {
-			//console.log(data);
-		},
 		error: function(error) {
   			console.log(error);
 		},

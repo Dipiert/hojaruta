@@ -20,10 +20,9 @@ class State {
 		$query = "UPDATE estado_item SET id_estado = '" . $newState . '\' WHERE nro_inventario = \''. $stockNumber. "'";
 		$result = mysqli_query($this->conn, $query);
 		if (!$result) {
-	        mysqli_error($conn);
+	        return mysqli_error($this->conn);
 	    }
 	    return $this->storeMovement();
-	    //return $query; 
 	}
 
 	function storeMovement() {
@@ -32,20 +31,22 @@ class State {
 		
 		$oldState = $_POST['oldState'];
 		$idOldState = $this->getIdState($oldState);
-
 		$stockNumber = $_POST['stockNumber'];
 		$actualState = $_POST['newState'];
-
 		$fecha = $this->getFecha();
-		$query = "INSERT INTO movimientos
-				  VALUES('$idResponsable', $fecha, $stockNumber, $idOldState, $actualState)";
-		return $query;
+		$query = "INSERT INTO movimientos VALUES('$idResponsable', '$fecha', '$stockNumber', '$idOldState', '$actualState')";
+		$result = mysqli_query($this->conn, $query);
+		if (!$result) {
+	        return mysqli_error($this->conn);
+	    } else {
+	    	return "Correcto";
+	    }	
 	}
 
 //INSERT INTO movimientos VALUES(-1, 2018-03-13, 0, -1, 0)
 
 	function getIdState($oldState) {
-		$query = "SELECT id FROM estados WHERE estado LIKE '$oldState'";
+		$query = "SELECT id FROM estado WHERE estado LIKE '$oldState'";
 		$result = mysqli_query($this->conn, $query);
 		if (!$result) {
 			return -1;
