@@ -10,6 +10,7 @@ include ('includes/login_required.php');
 <body>
    <a href="frm_registrar_item.php">Ingresar Item</a>
    <a href="mover_item.html">Mover Item</a>
-   <a href="listar_informes.php">Informes</a>
+   <a href="informes/listar_informes.php">Informes</a>
+   <a href="cerrar_sesion.php">Cerrar Sesión</a>
 </body>
 </html>

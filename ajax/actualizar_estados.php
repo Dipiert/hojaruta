@@ -43,8 +43,6 @@ class State {
 	    }	
 	}
 
-//INSERT INTO movimientos VALUES(-1, 2018-03-13, 0, -1, 0)
-
 	function getIdState($oldState) {
 		$query = "SELECT id FROM estado WHERE estado LIKE '$oldState'";
 		$result = mysqli_query($this->conn, $query);

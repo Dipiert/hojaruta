@@ -1,5 +1,5 @@
 <?php
-include ('includes/login_required.php');
+include ('../includes/login_required.php');
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ include ('includes/login_required.php');
 </head>
 <body>
 <p>
-	<a>Items en cada estado</a>
+	<a href="frm_items_en_cada_estado.html">Items en cada estado</a>
 </p>
 <p>
 	<a>Items movidos por fecha</a>
