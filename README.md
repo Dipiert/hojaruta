@@ -15,3 +15,15 @@ return array (
 			  "db" => "hojaruta",
 );
 ```
+### Table 'estado'
+
+- Sellado/Inventario
+- Seguridad
+- Clasificación
+- Catalogación/Item
+- Indización
+- Librística
+- Código de Barra
+- Rótulo
+- Control
+- Sala
