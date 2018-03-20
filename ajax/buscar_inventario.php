@@ -1,7 +1,7 @@
 <?php
 
 include ('../includes/login_required.php');
-require_once("../DB.php");
+require_once("../controllers/DB.php");
 echo getBiblioData();
 
 function getBiblioData() {  
@@ -14,7 +14,7 @@ function getBiblioData() {
             INNER JOIN estado e
             ON i.nro_inventario=ei.nro_inventario
             AND e.id=ei.id_estado
-            WHERE i.nro_inventario =' . $stockNumber;
+            WHERE i.nro_inventario =' . "'$stockNumber'";
     
     $result = mysqli_query($conn, $query);
     if (!$result) {

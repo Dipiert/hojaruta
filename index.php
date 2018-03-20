@@ -1,8 +1,19 @@
 <?php
-session_start();
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {	
-    header('Location: menu.php');
-}
+	require_once('controllers/User.php' );
+	session_start();
+
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {	
+	    header('Location: menu.php');
+	} elseif (areFieldsSent()) {
+		$userInstance = new User;
+		$user = $_POST['user'];
+		$password = $_POST['password'];
+		$userInstance->login($user, $password);
+	}
+
+	function areFieldsSent() {
+		return isset($_POST['user']) && isset($_POST['password']);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +30,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     </script>
 </head>
 <body>
-<form action="verificar_usuario.php" method="POST">
+<form action="index.php" method="POST">
 	<p>
 		<label>Usuario:</label>
 		<input type="text" name="user">

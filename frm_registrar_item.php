@@ -1,5 +1,25 @@
 <?php
-include ('includes/login_required.php');
+include('includes/login_required.php');
+require_once('controllers/Item.php' );
+
+if($_SERVER['REQUEST_METHOD'] == "POST" and areFieldsSent()) {
+    storeItem();     
+}
+
+function storeItem() {
+    $item = new Item;
+    $author = $_POST['author'];
+    $title = $_POST['title'];
+    $stockNumber = $_POST['stockNumber'];
+    $item->storeItem($author, $title, $stockNumber);    
+}
+
+function areFieldsSent() {
+    return ( isset($_POST['author'])
+             and isset($_POST['title'])
+             and isset($_POST['stockNumber'])
+           );
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +30,7 @@ include ('includes/login_required.php');
     <meta description="Roadmap for Libraries">
 </head>
 <body>
-<form action="registrar_item.php" method="POST">
+<form action="frm_registrar_item.php" method="POST">
     <p>
         <label>Autor: </label>
         <input type="text" name="author">

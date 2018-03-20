@@ -1,5 +1,10 @@
 <?php
-include ('includes/login_required.php');
+include('includes/login_required.php');
+include('controllers/Session.php');
+if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
+    $session = new Session;
+    $session->logout();
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +16,8 @@ include ('includes/login_required.php');
    <a href="frm_registrar_item.php">Ingresar Item</a>
    <a href="mover_item.html">Mover Item</a>
    <a href="informes/listar_informes.php">Informes</a>
-   <a href="cerrar_sesion.php">Cerrar Sesión</a>
+   <form method="post">
+		<input type='submit' value='Cerrar Sesión' name='logout'>
+   </form>
 </body>
 </html>

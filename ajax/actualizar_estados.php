@@ -1,7 +1,7 @@
 <?php
 
 include ('../includes/login_required.php');
-require_once("../DB.php");
+require_once("../controllers/DB.php");
 $state = new State();
 echo $state->updateState();
 

@@ -1,7 +1,7 @@
 <?php
 
 include ('../includes/login_required.php');
-require_once("../DB.php");
+require_once("../controllers/DB.php");
 echo getStates();
 
 function getStates() {
