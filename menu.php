@@ -14,7 +14,7 @@ if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
 </head>
 <body>
    <a href="frm_registrar_item.php">Ingresar Item</a>
-   <a href="mover_item.html">Mover Item</a>
+   <a href="frm_mover_item.html">Mover Item</a>
    <a href="informes/listar_informes.php">Informes</a>
    <form method="post">
 		<input type='submit' value='Cerrar Sesión' name='logout'>

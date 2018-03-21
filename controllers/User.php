@@ -15,15 +15,11 @@ class User {
 
 	public function login($user, $password) {
 		if ($this->isCorrectDataLogin()) {
-			$username = mysqli_real_escape_string($this->conn,$user);
-			$password = md5(mysqli_real_escape_string($this->conn,$password));
-			$query = 'SELECT * 
-					  FROM usuarios
-					  WHERE usuario='. "'$username' " . 'AND contrasena=' . "'$password'";
-			$result = mysqli_query($this->conn, $query);
-			if (!$result) {
-				mysqli_error($this->conn);
-			} else {
+			$password = md5($password);
+			$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?");
+			$stmt->bind_param("ss", $user, $password);
+			if ($stmt->execute()) {
+				$result = $stmt->get_result();
 				if (mysqli_num_rows($result) > 0) {
 					$this->session->login($username);
 					$home = 'menu.php';
@@ -31,10 +27,12 @@ class User {
 				} else {
 					echo "Nombre de usuario y/o contraseña incorrecta";
 				}
+			} else {
+				mysqli_error($this->conn);
 			}
 		} else {
 			echo "Login incorrecto";
-		}		
+		}
 	}
 
 	private function isCorrectDataLogin() {

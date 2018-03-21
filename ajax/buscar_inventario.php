@@ -8,21 +8,20 @@ function getBiblioData() {
     $stockNumber = $_POST['stockNumber'];  
     $db = new DB;
     $conn = $db->getConnection();
-    $query = 'SELECT i.autor, i.titulo, e.estado
-            FROM item i
-            INNER JOIN estado_item ei
-            INNER JOIN estado e
-            ON i.nro_inventario=ei.nro_inventario
-            AND e.id=ei.id_estado
-            WHERE i.nro_inventario =' . "'$stockNumber'";
-    
-    $result = mysqli_query($conn, $query);
-    if (!$result) {
-        mysqli_error($conn);
+    $stmt = $conn->prepare("SELECT i.autor, i.titulo, e.estado
+                            FROM item i
+                            INNER JOIN estado_item ei
+                            INNER JOIN estado e
+                            ON i.nro_inventario=ei.nro_inventario
+                            AND e.id=ei.id_estado
+                            WHERE i.nro_inventario = ?");
+    $stmt->bind_param("s", $stockNumber);
+    if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        return prepareResponse($result);
     } else {
-        $result = prepareResponse($result);
-    }    
-    return $result;
+        return mysqli_error($conn);
+    }
 }
 
 function prepareResponse($result) {

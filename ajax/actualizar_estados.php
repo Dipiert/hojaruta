@@ -17,12 +17,13 @@ class State {
 	function updateState() {	
 		$newState = $_POST['newState'];
 		$stockNumber = $_POST['stockNumber'];
-		$query = "UPDATE estado_item SET id_estado = '" . $newState . '\' WHERE nro_inventario = \''. $stockNumber. "'";
-		$result = mysqli_query($this->conn, $query);
-		if (!$result) {
-	        return mysqli_error($this->conn);
-	    }
-	    return $this->storeMovement();
+		$stmt = $this->conn->prepare("UPDATE estado_item SET id_estado = ? WHERE nro_inventario = ?");
+		$stmt->bind_param("ss", $newState, $stockNumber);
+		if ($stmt->execute()) {
+			return $this->storeMovement();
+		} else {
+			return mysqli_error($this->conn);
+		}
 	}
 
 	function storeMovement() {
@@ -34,13 +35,13 @@ class State {
 		$stockNumber = $_POST['stockNumber'];
 		$actualState = $_POST['newState'];
 		$fecha = $this->getFecha();
-		$query = "INSERT INTO movimientos VALUES('$idResponsable', '$fecha', '$stockNumber', '$idOldState', '$actualState')";
-		$result = mysqli_query($this->conn, $query);
-		if (!$result) {
-	        return mysqli_error($this->conn);
-	    } else {
-	    	return "Correcto";
-	    }	
+		$stmt = $this->conn->prepare("INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)");
+		$stmt->bind_param("sssss", $idResponsable, $fecha, $stockNumber, $idOldState, $actualState);
+		if ($stmt->execute()) {
+			return "Se ha registrado un movimiento exitosamente";
+		} else {
+			return mysqli_error($this->conn);
+		}
 	}
 
 	function getIdState($oldState) {

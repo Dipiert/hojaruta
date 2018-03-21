@@ -7,14 +7,13 @@ echo getStates();
 function getStates() {
 	$db = new DB;
     $conn = $db->getConnection();
-	$query = "SELECT estado, id FROM estado";
-	$result = mysqli_query($conn, $query);
-	if (!$result) {
-        mysqli_error($conn);
+    $stmt = $conn->prepare("SELECT estado, id FROM estado");
+	if ($stmt->execute()) {
+        $result = $stmt->get_result();
+        return prepareResponse($result);
     } else {
-        $result = prepareResponse($result);
-    }    
-    return $result;
+        return mysqli_error($conn);
+    }   
 }
 
 function prepareResponse($result) {
