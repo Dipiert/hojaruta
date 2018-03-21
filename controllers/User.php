@@ -6,22 +6,26 @@ class User {
 	private $db;
 	private $conn;
 	private $session;
+	private $user;
+	private $password;
 
-	public function __construct() {
+	public function __construct($user, $password) {
 		$this->db = new DB;
 		$this->conn = $this->db->getConnection();
 		$this->session = new Session;
+		$this->user = $user;
+		$this->password = $password;
 	}
 
-	public function login($user, $password) {
+	public function login() {
 		if ($this->isCorrectDataLogin()) {
-			$password = md5($password);
+			$this->password = md5($this->password);
 			$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?");
-			$stmt->bind_param("ss", $user, $password);
+			$stmt->bind_param("ss", $this->user, $this->password);
 			if ($stmt->execute()) {
 				$result = $stmt->get_result();
 				if (mysqli_num_rows($result) > 0) {
-					$this->session->login($username);
+					$this->session->login($this->user);
 					$home = 'menu.php';
 					header('Location: '. $home);
 				} else {

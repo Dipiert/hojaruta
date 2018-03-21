@@ -1,14 +1,14 @@
 <?php
 	require_once('controllers/User.php' );
 	session_start();
-
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {	
 	    header('Location: menu.php');
 	} elseif (areFieldsSent()) {
-		$userInstance = new User;
 		$user = $_POST['user'];
 		$password = $_POST['password'];
-		$userInstance->login($user, $password);
+		$userInstance = new User($user, $password);
+		$userInstance->login();
+		//$userInstance->login($user, $password);
 	}
 
 	function areFieldsSent() {

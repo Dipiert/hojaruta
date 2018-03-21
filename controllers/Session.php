@@ -8,6 +8,10 @@ class Session {
         header('Location: index.php');
     }
 
+    public function getUsername() {
+        return $_SESSION['username'];
+    }
+
     public function login($username) {
 		$_SESSION['loggedin'] = true;
 		$_SESSION['username'] = $username;
