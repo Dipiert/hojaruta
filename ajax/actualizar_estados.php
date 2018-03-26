@@ -22,7 +22,7 @@ class State {
 		if ($stmt->execute()) {
 			return $this->storeMovement();
 		} else {
-			return mysqli_error($this->conn);
+			return $this->conn->error;
 		}
 	}
 
@@ -51,7 +51,7 @@ class State {
 			if ($stmt->execute()) {
 				echo "Se ha cambiado el estado satisfactoriamente";
 			} else {
-				return mysqli_error($this->conn);
+				return $this->conn->error;
 			}
 		} else {
 			echo "ERROR";
@@ -61,15 +61,12 @@ class State {
 	function getIdState($oldState) {
 		echo "oldState es $oldState";
 		defined('INVALID_STATE') || define('INVALID_STATE', -1);
-		//mysqli_set_charset($this->conn,"utf8");
-		var_dump($this->conn);
 		$stmt = $this->conn->prepare("SELECT id FROM estado WHERE estado = ?");
 		$stmt->bind_param("s", $oldState);
-		var_dump($stmt);
 		if ($stmt->execute()) {
 			$result = $stmt->get_result();
 
-			$row = mysqli_fetch_assoc($result);
+			$row = $result->fetch_assoc();
 			
 			return $row['id'];
 		} else {
@@ -83,7 +80,7 @@ class State {
 		$stmt->bind_param("s", $responsible);
 		if ($stmt->execute()) {
 			$result = $stmt->get_result();
-			$row = mysqli_fetch_assoc($result);	
+			$row = $result->fetch_assoc();	
 			return $row['id'];
 		} else {
 			echo "Ha ocurrido un error con el usuario";

@@ -24,7 +24,7 @@ class User {
 			$stmt->bind_param("ss", $this->user, $this->password);
 			if ($stmt->execute()) {
 				$result = $stmt->get_result();
-				if (mysqli_num_rows($result) > 0) {
+				if ($result->num_rows > 0) {
 					$this->session->login($this->user);
 					$home = 'menu.php';
 					header('Location: '. $home);
@@ -32,7 +32,7 @@ class User {
 					echo "Nombre de usuario y/o contraseña incorrecta";
 				}
 			} else {
-				mysqli_error($this->conn);
+				echo $this->conn->error;
 			}
 		} else {
 			echo "Login incorrecto";

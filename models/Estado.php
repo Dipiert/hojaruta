@@ -13,8 +13,8 @@ class Estado {
         $stmt = $this->conn->prepare("SELECT id, estado FROM estado");
         if ($stmt->execute()) {
             $result = $stmt->get_result();
-            if (mysqli_num_rows($result) > 0) {
-                return mysqli_fetch_all($result, MYSQLI_ASSOC);   
+            if ($result->num_rows > 0) {
+                return $result->fetch_all(MYSQLI_ASSOC);   
             } else {
                 echo nl2br("Ocurrio un error con la consulta SQL");    
             }

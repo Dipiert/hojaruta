@@ -20,12 +20,12 @@ function getBiblioData() {
         $result = $stmt->get_result();
         return prepareResponse($result);
     } else {
-        return mysqli_error($conn);
+        return $this->conn->error;
     }
 }
 
-function prepareResponse($result) {
-    $row = mysqli_fetch_assoc($result);
+function prepareResponse($result) {    
+    $row = $result->fetch_assoc();;
     $author = $row['autor'];
     $title = $row['titulo'];
     $state = $row['estado'];

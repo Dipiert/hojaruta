@@ -12,13 +12,13 @@ function getStates() {
         $result = $stmt->get_result();
         return prepareResponse($result);
     } else {
-        return mysqli_error($conn);
+        return $conn->error;
     }   
 }
 
 function prepareResponse($result) {
     $states = [];
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($row = $result->fetch_assoc()) {
         $state = $row['estado'];
         $state = iconv('ISO-8859-1', 'UTF-8', $state);
     	$states += [$state => $row['id']];

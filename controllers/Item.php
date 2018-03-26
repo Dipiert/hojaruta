@@ -36,8 +36,8 @@ class Item {
 
     private function store($conn, $sql) {
         defined('MYSQL_CODE_DUPLICATE_KEY') || define('MYSQL_CODE_DUPLICATE_KEY',1062);   
-        if (!mysqli_query($conn, $sql)) {
-            if (mysqli_errno($conn) == MYSQL_CODE_DUPLICATE_KEY) {            
+        if (!$this->conn->query($sql)) {
+            if ($this->conn->mysqli_errno == MYSQL_CODE_DUPLICATE_KEY) {            
                 echo nl2br("El número de inventario cargado ya existe");
             } else {
                 echo nl2br("Ocurrio un error con la consulta SQL");

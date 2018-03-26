@@ -12,9 +12,8 @@ class DB {
                            $conf["db"]
                         );
       $this->connection->set_charset("utf-8");     
-      //mysqli_set_charset($this->connection,"utf8");
-      if(mysqli_connect_error()) {
-         trigger_error("Failed to connect to MySQL: " . mysql_connect_error(),
+      if($this->connection->connect_error) {
+         trigger_error("Failed to connect to MySQL: " . $this->connection->connect_error,
              E_USER_ERROR);
       }
    }
