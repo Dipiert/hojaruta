@@ -12,8 +12,7 @@ class Item {
     }
 
     private function prepareString($str) {
-        $str = utf8_decode($str);
-        return $str;
+        return iconv('ISO-8859-1', 'UTF-8', $str);
     }
 
     private function prepareStrings($strs) {

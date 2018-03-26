@@ -19,7 +19,9 @@ function getStates() {
 function prepareResponse($result) {
     $states = [];
     while ($row = mysqli_fetch_assoc($result)) {
-    	$states += [utf8_encode($row['estado']) => $row['id']];
+        $state = $row['estado'];
+        $state = iconv('ISO-8859-1', 'UTF-8', $state);
+    	$states += [$state => $row['id']];
     }
     return json_encode($states);	
 }

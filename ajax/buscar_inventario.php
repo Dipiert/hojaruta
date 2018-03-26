@@ -26,8 +26,11 @@ function getBiblioData() {
 
 function prepareResponse($result) {
     $row = mysqli_fetch_assoc($result);
-    $author = utf8_encode($row['autor']);
-    $title = utf8_encode($row['titulo']);
-    $state = utf8_encode($row['estado']);
+    $author = $row['autor'];
+    $title = $row['titulo'];
+    $state = $row['estado'];
+    $author = iconv('ISO-8859-1', 'UTF-8', $author);
+    $title = iconv('ISO-8859-1', 'UTF-8', $title);
+    $state = iconv('ISO-8859-1', 'UTF-8', $state);
     return json_encode(Array ("author" => $author, "title" => $title, "state" => $state));
 }
