@@ -1,7 +1,7 @@
-<?php
+<?php 
 
 include ('../includes/login_required.php');
-require_once("../controllers/DB.php");
+require_once("../controllers/DBController.php");
 $state = new State();
 echo $state->updateState();
 
@@ -10,20 +10,23 @@ class State {
 	private $db;
 
 	function __construct() {
-		$this->db = new DB;
+		$this->db = new DBController();
 		$this->conn = $this->db->getConnection();
 	}
 
 	function updateState() {	
 		$newState = $_POST['newState'];
 		$stockNumber = $_POST['stockNumber'];
-		$stmt = $this->conn->prepare("UPDATE estado_item SET id_estado = ? WHERE nro_inventario = ?");
-		$stmt->bind_param("ss", $newState, $stockNumber);
-		if ($stmt->execute()) {
-			return $this->storeMovement();
-		} else {
-			return $this->conn->error;
-		}
+		$sql = 'UPDATE estado_item
+    			SET id_estado = :id_estado
+    			WHERE nro_inventario = :nro_inventario';
+    	$stmt = $this->conn->prepare($sql);
+    	$execResult = $stmt->execute(array(':id_estado' => $newState, ':nro_inventario' => $stockNumber));
+    	if ($execResult) {
+    		return $this->storeMovement();
+    	} else {
+    		echo "Ha ocurrido un error";
+    	}
 	}
 
 	function isValidResponsible($responsible) {
@@ -39,58 +42,63 @@ class State {
 		$responsible = $this->getResponsible();
 		if ($this->isValidResponsible($responsible)) {
 			$idResponsible = $this->getIdResponsible($responsible);
-			$oldState = $_POST['oldState'];
-			
+			$oldState = $_POST['oldState'];			
 			$idOldState = $this->getIdState($oldState);
-
-			$stockNumber = $_POST['stockNumber'];
-			$actualState = $_POST['newState'];
-			$fecha = $this->getFecha();
-			$stmt = $this->conn->prepare("INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)");
-			$stmt->bind_param("issii", $idResponsible, $fecha, $stockNumber, $idOldState, $actualState);
-			if ($stmt->execute()) {
-				echo "Se ha cambiado el estado satisfactoriamente";
+			if (!$idOldState) {
+				echo "No puedo seguir";
 			} else {
-				return $this->conn->error;
-			}
+				$stockNumber = $_POST['stockNumber'];
+				$actualState = $_POST['newState'];
+				$fecha = $this->getFecha();
+				$sql = "INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)";
+				$stmt = $this->conn->prepare($sql);
+				$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState,	 $actualState));
+				if ($execResult) {
+					echo "Se ha cambiado el estado satisfactoriamente";
+				} else {
+					echo "error";
+				}
+			}			
 		} else {
 			echo "ERROR";
 		}	
 	}
 
-	function getIdState($oldState) {
-		echo "oldState es $oldState";
-		defined('INVALID_STATE') || define('INVALID_STATE', -1);
-		$stmt = $this->conn->prepare("SELECT id FROM estado WHERE estado = ?");
-		$stmt->bind_param("s", $oldState);
-		if ($stmt->execute()) {
-			$result = $stmt->get_result();
+	function getIdResponsible($responsible) {
+		defined('INVALID_RESPONSIBLE') || define('INVALID_RESPONSIBLE', -1);
+		$sql = "SELECT id FROM usuarios WHERE usuario = '$responsible'";
+		$stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);		
+		if ($stmt) {
+			$row = $stmt->fetch();
+			return $row['id'];	
+		}
+		else {
+			echo "Ha ocurrido un error con el usuario";
+		}
+	}
 
-			$row = $result->fetch_assoc();
-			
-			return $row['id'];
+	function getIdState($oldState) {
+		defined('INVALID_STATE') || define('INVALID_STATE', -1);
+		echo "oldState es: $oldState";
+		$sql = "SELECT id FROM estado WHERE estado LIKE :estado collate utf8_general_ci";
+		$stmt = $this->conn->prepare($sql);		
+		//$stmt->bindParam(':estado', $oldState, PDO::PARAM_STR);
+		//var_dump($stmt);
+		$execResult = $stmt->execute(array(':estado' => $oldState));
+		if ($execResult) {		
+			$row = $stmt->fetch();
+			echo "ID ES: " . $row['id'];
+			return $row['id'];	
+			//$row = $execResult->fetch(PDO::FETCH_ASSOC);
+			//return $row['id'];
 		} else {
 			return INVALID_STATE;
 		}
 	}
 
-	function getIdResponsible($responsible) {
-		//defined('INVALID_RESPONSIBLE') || define('INVALID_RESPONSIBLE', -1);
-		$stmt = $this->conn->prepare("SELECT id FROM usuarios WHERE usuario LIKE ?");
-		$stmt->bind_param("s", $responsible);
-		if ($stmt->execute()) {
-			$result = $stmt->get_result();
-			$row = $result->fetch_assoc();	
-			return $row['id'];
-		} else {
-			echo "Ha ocurrido un error con el usuario";
-			return null;
-		}
-	}
-
 	function getResponsible() {
-		require_once(dirname(__FILE__) . "/../controllers/Session.php");
-		$session = new Session;
+		require_once(dirname(__FILE__) . "/../controllers/SessionController.php");
+		$session = new SessionController();
 		return $session->getUsername();
 	}
 

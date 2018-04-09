@@ -1,8 +1,8 @@
 <?php
-require_once("controllers/DB.php");
-require_once("controllers/Session.php");
+require_once("controllers/DBController.php");
+require_once("controllers/SessionController.php");
 
-class User {
+class UserController {
 	private $db;
 	private $conn;
 	private $session;
@@ -10,9 +10,9 @@ class User {
 	private $password;
 
 	public function __construct($user, $password) {
-		$this->db = new DB;
+		$this->db = new DBController();
 		$this->conn = $this->db->getConnection();
-		$this->session = new Session;
+		$this->session = new SessionController();
 		$this->user = $user;
 		$this->password = $password;
 	}
@@ -20,11 +20,11 @@ class User {
 	public function login() {
 		if ($this->isCorrectDataLogin()) {
 			$this->password = md5($this->password);
-			$stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?");
-			$stmt->bind_param("ss", $this->user, $this->password);
-			if ($stmt->execute()) {
-				$result = $stmt->get_result();
-				if ($result->num_rows > 0) {
+			$sql = "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?";
+			$stmt = $this->conn->prepare($sql);
+			$execResult = $stmt->execute(array($this->user, $this->password));
+			if ($execResult) {
+				if ($stmt->fetchColumn() > 0) {
 					$this->session->login($this->user);
 					$home = 'menu.php';
 					header('Location: '. $home);

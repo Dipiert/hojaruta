@@ -1,13 +1,14 @@
 <?php
-include('includes/login_required.php');
-require_once('controllers/Item.php' );
 
-if($_SERVER['REQUEST_METHOD'] == "POST" and areFieldsSent()) {
-    storeItem();     
+include('includes/login_required.php');
+require_once(dirname(__FILE__) . '/models/Item.php');
+
+if($_SERVER['REQUEST_METHOD'] === "POST" and areFieldsSent()) {
+    storeItem();
 }
 
 function storeItem() {
-    $item = new Item;
+    $item = new Item();
     $author = $_POST['author'];
     $title = $_POST['title'];
     $stockNumber = $_POST['stockNumber'];

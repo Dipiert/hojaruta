@@ -1,8 +1,8 @@
 <?php
 include('includes/login_required.php');
-include('controllers/Session.php');
+include('controllers/SessionController.php');
 if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
-    $session = new Session;
+    $session = new SessionController();
     $session->logout();
 }
 ?>

@@ -1,27 +1,38 @@
 <?php
 
 include ('../includes/login_required.php');
-require_once("../controllers/DB.php");
-echo getStates();
+require_once("../controllers/DBController.php");
+$state = new State();
+echo $state->getStates();
 
-function getStates() {
-	$db = new DB;
-    $conn = $db->getConnection();
-    $stmt = $conn->prepare("SELECT estado, id FROM estado");
-	if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        return prepareResponse($result);
-    } else {
-        return $conn->error;
-    }   
-}
+class State { 
+    private $conn;
+    private $db;
 
-function prepareResponse($result) {
-    $states = [];
-    while ($row = $result->fetch_assoc()) {
-        $state = $row['estado'];
-        $state = iconv('ISO-8859-1', 'UTF-8', $state);
-    	$states += [$state => $row['id']];
+    function __construct() {
+        $this->db = new DBController();
+        $this->conn = $this->db->getConnection();
     }
-    return json_encode($states);	
+
+    function getStates() {
+        $sql = "SELECT estado, id FROM estado";
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt->execute()) {
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $this->prepareResponse($rows);
+        } else {
+            return $conn->error;
+        }   
+    }
+
+    function prepareResponse($rows) {
+        $states = [];
+        foreach($rows as $row) {
+            $state = $row['estado'];
+            $states += [$state => $row['id']];
+        }
+        return json_encode($states,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);   
+    }
+
 }
+
