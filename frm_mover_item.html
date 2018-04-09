@@ -40,7 +40,7 @@ $("#searchStockNumber").click(function() {
 		async: false,
 		cache: false,
 		error: function(error) {
-			console.log(error);
+			alert(error);
 		}
 	});
 
@@ -50,7 +50,7 @@ $("#searchStockNumber").click(function() {
 		async: false,
 		data: {stockNumber: stockNumber},
 		error: function(error) {
-  			console.log(error);
+  			alert(error);
 		},
 	});
 
@@ -59,9 +59,7 @@ $("#searchStockNumber").click(function() {
 })
 
 function showResult(defStates, defBiblio) {
-	console.log("Before parse: " + defBiblio[0]);	
 	biblioData = JSON.parse(defBiblio[0]);
-	console.log(biblioData);
 	showBiblioData(biblioData['author'], biblioData['title']);	
 	showStates(JSON.parse(defStates[0]), biblioData['state']);	
 	$("#changeStatus").css("visibility", "visible");
@@ -107,14 +105,16 @@ $("#changeStatus").click(function() {
 				stockNumber: stockNumber,
 				oldState: biblioData['state'],
 			  },
+		error: function(e) {
+			alert(e);
+		},
 		success: function(data) {
-			console.log(data);		
+			alert(data);
 		}
-
+	}).then(function() {
+		location.reload();	
 	});
 	
-	alert("Se ha actualizado el estado correctamente");
-	location.reload();
 });
 
 </script>

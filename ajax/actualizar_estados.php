@@ -42,25 +42,25 @@ class State {
 		$responsible = $this->getResponsible();
 		if ($this->isValidResponsible($responsible)) {
 			$idResponsible = $this->getIdResponsible($responsible);
-			$oldState = $_POST['oldState'];			
+			$oldState = $_POST['oldState'];
 			$idOldState = $this->getIdState($oldState);
-			if (!$idOldState) {
-				echo "No puedo seguir";
+			if ($idOldState === false) {
+				return "No puedo seguir";
 			} else {
 				$stockNumber = $_POST['stockNumber'];
 				$actualState = $_POST['newState'];
 				$fecha = $this->getFecha();
 				$sql = "INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)";
 				$stmt = $this->conn->prepare($sql);
-				$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState,	 $actualState));
+				$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
 				if ($execResult) {
-					echo "Se ha cambiado el estado satisfactoriamente";
+					return "Se ha cambiado el estado satisfactoriamente";
 				} else {
-					echo "error";
+					return "error";
 				}
 			}			
 		} else {
-			echo "ERROR";
+			return "ERROR";
 		}	
 	}
 
@@ -79,7 +79,6 @@ class State {
 
 	function getIdState($oldState) {
 		defined('INVALID_STATE') || define('INVALID_STATE', -1);
-		echo "oldState es: $oldState";
 		$sql = "SELECT id FROM estado WHERE estado LIKE :estado collate utf8_general_ci";
 		$stmt = $this->conn->prepare($sql);		
 		//$stmt->bindParam(':estado', $oldState, PDO::PARAM_STR);
@@ -87,10 +86,7 @@ class State {
 		$execResult = $stmt->execute(array(':estado' => $oldState));
 		if ($execResult) {		
 			$row = $stmt->fetch();
-			echo "ID ES: " . $row['id'];
 			return $row['id'];	
-			//$row = $execResult->fetch(PDO::FETCH_ASSOC);
-			//return $row['id'];
 		} else {
 			return INVALID_STATE;
 		}
