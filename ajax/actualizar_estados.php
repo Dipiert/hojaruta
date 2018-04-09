@@ -52,15 +52,18 @@ class State {
 				$fecha = $this->getFecha();
 				$sql = "INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)";
 				$stmt = $this->conn->prepare($sql);
-				$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
-				if ($execResult) {
-					return "Se ha cambiado el estado satisfactoriamente";
-				} else {
-					return "error";
-				}
+                try {
+         			$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
+      			} catch (PDOException $e) {
+      				if ($e->errorInfo[1] === 1062) {
+      					echo "Cuidado: El movimiento que intenta llevar a cabo para ese número de item ya fue realizado hoy y no se registrará.";
+      				} else {
+      					echo $e->getMessage();
+      				}
+      			}
 			}			
 		} else {
-			return "ERROR";
+			echo "Ha ocurrido un error al obtener el responsable del movimiento";
 		}	
 	}
 
