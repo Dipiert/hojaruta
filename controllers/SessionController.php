@@ -12,12 +12,12 @@ class SessionController {
         return $_SESSION['username'];
     }
 
-    public function login($username) {
+    public function login($username, $isAdmin) {
 		$_SESSION['loggedin'] = true;
 		$_SESSION['username'] = $username;
 		$_SESSION['start'] = time();
 		$_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
-        $_SESSION['admin'] = "";
+        $_SESSION['admin'] = $isAdmin;
 	}
 
     public function isAdmin() {
