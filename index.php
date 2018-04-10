@@ -8,7 +8,6 @@
 		$password = $_POST['password'];
 		$userInstance = new UserController($user, $password);
 		$userInstance->login();
-		//$userInstance->login($user, $password);
 	}
 
 	function areFieldsSent() {

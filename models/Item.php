@@ -1,14 +1,7 @@
 <?php
 
-//namespace models;
-
 require_once(dirname(__FILE__) . "/../controllers/DBController.php");
 require_once(dirname(__FILE__) . "/../controllers/ItemController.php");
-//require_once(dirname(__FILE__) . "/../models/Item.php");
-//require("../vendor/autoload.php");
-//require(dirname(__FILE__) . "/../vendor/autoload.php");
-//use controllers\DB;
-//use controllers\Item;
 
 class Item {
 	private $db;
@@ -23,30 +16,24 @@ class Item {
 
 	public function storeItem($author, $title, $stockNumber) {
 		$this->item->prepareStrings([$author, $title, $stockNumber]);
-
-		$sql = $this->conn->prepare("INSERT INTO item (autor, titulo, nro_inventario) VALUES (?, ?, ?)");
-		$sql->bind_param("sss", $author, $title, $stockNumber);
-		if ($sql->execute()) {
-			$sql = $this->conn->prepare("INSERT INTO estado_item (nro_inventario, id_estado) VALUES (?, 0)");
-			$sql->bind_param("s", $stockNumber);
-			if ($sql->execute()) {
-				echo nl2br("Se ha registrado el item correctamente");
-			}
-		}
-        $this->conn->close();
-	}
-
-    private function store($conn, $sql) {
-        defined('MYSQL_CODE_DUPLICATE_KEY') || define('MYSQL_CODE_DUPLICATE_KEY',1062);   
-        if (!$this->conn->query($sql)) {
-            if ($this->conn->mysqli_errno == MYSQL_CODE_DUPLICATE_KEY) {            
-                echo nl2br("El número de inventario cargado ya existe");
+        $sql = "INSERT INTO item (autor, titulo, nro_inventario) VALUES (?, ?, ?)";
+    	$stmt = $this->conn->prepare($sql);
+        try {
+            $execResult = $stmt->execute(array($author, $title, $stockNumber));
+            if ($execResult) {
+                $sql = "INSERT INTO estado_item (nro_inventario, id_estado) VALUES (?, 0)";
+                $stmt = $this->conn->prepare($sql);
+                $execResult = $stmt->execute(array($stockNumber));
+                if ($execResult) {
+                    echo "Exito";
+                } else {
+                    echo "Ha ocurrido un error al registrar el estado inicial del item";
+                }
             } else {
-                echo nl2br("Ocurrio un error con la consulta SQL");
-            }        
-        } else {
-            return true;
+                echo "Ha ocurrido un error al insertar el item";
+            }
+        } catch(PDOException $e) {
+            echo "El número de inventario que intenta registrar ya está asociado a un Item.";
         }
-    }
-
+	}
 }

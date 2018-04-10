@@ -1,8 +1,4 @@
 <?php 
-//namespace controllers;
-//require(dirname(__FILE__) . "/../vendor/autoload.php");
-//use DB;
-//require("controllers/DBController.php");
 
 class ItemController {
 

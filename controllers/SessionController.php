@@ -17,6 +17,15 @@ class SessionController {
 		$_SESSION['username'] = $username;
 		$_SESSION['start'] = time();
 		$_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
+        $_SESSION['admin'] = "";
 	}
+
+    public function isAdmin() {
+
+    }
+    
+    public function getAdmins() {
+        
+    }
 
 }
