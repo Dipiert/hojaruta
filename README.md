@@ -9,10 +9,12 @@ Hoja de Ruta para Bibliotecas
 ```
 <?php
 return array (
-			  "server" => "localhost",
-			  "user" => "root",
-			  "password" => "toor",
-			  "db" => "hojaruta",
+	  "host" => "localhost",
+	  "db_engine" => "mysql",
+	  "dbname" => "hojaruta",			  
+	  "user" => "root",
+	  "password" => "toor",
+	  "options" => array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION),
 );
 ```
 ### Table 'estado'
