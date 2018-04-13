@@ -16,10 +16,10 @@ class Item {
 
 	public function storeItem($author, $title, $stockNumber) {
 		$this->item->prepareStrings([$author, $title, $stockNumber]);
-        $sql = "INSERT INTO item (autor, titulo, nro_inventario) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO item (autor, titulo, nro_inventario, creado_el) VALUES (?, ?, ?, ?)";
     	$stmt = $this->conn->prepare($sql);
         try {
-            $execResult = $stmt->execute(array($author, $title, $stockNumber));
+            $execResult = $stmt->execute(array($author, $title, $stockNumber, NULL));
             if ($execResult) {
                 $sql = "INSERT INTO estado_item (nro_inventario, id_estado) VALUES (?, 0)";
                 $stmt = $this->conn->prepare($sql);
@@ -33,7 +33,7 @@ class Item {
                 echo "Ha ocurrido un error al insertar el item";
             }
         } catch(PDOException $e) {
-            echo "El número de inventario que intenta registrar ya está asociado a un Item.";
+            echo $e->getMessage();//"El número de inventario que intenta registrar ya está asociado a un Item.";
         }
 	}
 }

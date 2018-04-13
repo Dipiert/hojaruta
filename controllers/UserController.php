@@ -20,14 +20,12 @@ class UserController {
 	public function login() {
 		if ($this->isCorrectDataLogin()) {
 			$this->password = md5($this->password);
-			$sql = "SELECT admin FROM usuarios WHERE usuario = ? AND contrasena = ?";
-			
+			$sql = "SELECT admin FROM usuarios WHERE usuario = ? AND contrasena = ?";			
 			$stmt = $this->conn->prepare($sql);
 			$execResult = $stmt->execute(array($this->user, $this->password));
 			if ($execResult) {
-				$row = $stmt->fetch(PDO::FETCH_ASSOC);
-				if (count($row) > 0) {
-				//if ($stmt->fetchColumn() > 0) {
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);				
+				if ($row & count($row) > 0) {
 					$isAdmin = $row['admin'];
 					$this->session->login($this->user, intval($isAdmin));
 					$home = 'menu.php';
