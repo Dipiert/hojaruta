@@ -18,7 +18,7 @@ if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
    <a href="informes/listar_informes.php">Informes</a>
    <?php if ($_SESSION["admin"] === 1) { ?>  
     <a href="admin/states_abm.php">Gestionar Estados</a>
-    <a href="informes/users_abm.php">Gestionar Usuarios</a>
+    <a href="admin/users_abm.php">Gestionar Usuarios</a>
    <?php } ?>
    <form method="post">
 		<input type='submit' value='Cerrar Sesión' name='logout'>

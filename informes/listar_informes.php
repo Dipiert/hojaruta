@@ -7,7 +7,7 @@ include ('../includes/login_required.php');
 <head>
 	<title>Listar Informes</title>
 	<meta charset="utf-8">
-	<meta description="Hoja de Ruta - Listar Informes">
+	<meta name="description" content="Hoja de Ruta - Listar Informes">
 	<meta author="Damián Rotta">
 </head>
 <body>

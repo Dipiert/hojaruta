@@ -6,7 +6,9 @@
 	} elseif (areFieldsSent()) {
 		$user = $_POST['user'];
 		$password = $_POST['password'];
-		$userInstance = new UserController($user, $password);
+		$userInstance = new UserController();
+		$userInstance->setUser($user);
+		$userInstance->setPassword($password);
 		$userInstance->login();
 	}
 
@@ -20,8 +22,8 @@
 <head>
 	<title>Inicio de Sesión</title>
 	<meta charset="utf-8">
-	<meta description="Hoja de Ruta - Login">
-	<meta author="Damián Rotta">
+	<meta name="description" content="Hoja de Ruta - Login">
+	<meta name="author" content="Damián Rotta">
 	<script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -32,11 +34,11 @@
 <form action="index.php" method="POST">
 	<p>
 		<label>Usuario:</label>
-		<input type="text" name="user">
+		<input type="text" name="user" title="Ingrese su usuario">
 	</p>
 	<p>
 		<label>Contraseña:</label>
-		<input type="password" name="password">
+		<input type="password" name="password" title="Ingrese su contraseña">
 	</p>
 	<p>
 		<input type="submit" id="sendLoginData" value="Ingresar">

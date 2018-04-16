@@ -1,6 +1,6 @@
 <?php
-require_once("controllers/DBController.php");
-require_once("controllers/SessionController.php");
+require_once(dirname(__FILE__) . "/DBController.php");
+require_once(dirname(__FILE__) . "/SessionController.php");
 
 class UserController {
 	private $db;
@@ -9,12 +9,34 @@ class UserController {
 	private $user;
 	private $password;
 
-	public function __construct($user, $password) {
+	public function __construct() {
 		$this->db = new DBController();
 		$this->conn = $this->db->getConnection();
 		$this->session = new SessionController();
+		/*$this->user = $user;
+		$this->password = $password;*/
+	}
+
+	public function setUser($user) {
 		$this->user = $user;
+	}
+
+	public function setPassword($password) {
 		$this->password = $password;
+	}
+
+	public function getAllUsers() {
+		$sql = "SELECT usuario FROM usuarios";
+		$stmt = $this->conn->prepare($sql);
+		$execResult = $stmt->execute();
+		$usuarios = [];
+		if ($execResult) {
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				array_push($usuarios, $row['usuario']);		
+			}
+		}
+
+		return $usuarios;
 	}
 
 	public function login() {

@@ -7,7 +7,7 @@ include ('includes/login_required.php');
 <head>
 	<title>Mover Item</title>
 	<meta charset="utf-8">
-    <meta description="Roadmap for Libraries">
+    <meta name="description" content="Roadmap for Libraries">
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -16,7 +16,7 @@ include ('includes/login_required.php');
 </head>
 <body>
 		<label>Nro de Inventario:</label>
-		<input type="text" id="stockNumber"/>
+		<input type="text" id="stockNumber" title="Ingrese Nro. Inventario">
 		<button type="submit" id="searchStockNumber">Buscar</button>
 		<div id="result"></div><br/>
 		<button type="submit" id="changeStatus" style="visibility: hidden">Cambiar Estado</button>

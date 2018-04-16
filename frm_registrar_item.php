@@ -28,21 +28,21 @@ function areFieldsSent() {
 <head>
     <title>Registrar item</title>
     <meta charset="utf-8">
-    <meta description="Roadmap for Libraries">
+    <meta name="description" content="Roadmap for Libraries">
 </head>
 <body>
 <form action="frm_registrar_item.php" method="POST">
     <p>
         <label>Autor: </label>
-        <input type="text" name="author">
+        <input type="text" name="author" title="Ingrese el nombre y apellido del autor">
     </p>
     <p>
         <label>Título: </label>
-        <input type="text" name="title">
+        <input type="text" name="title" title="Ingrese el título del item">
     </p>
     <p>
         <label>Inventario:</label>
-        <input type="text" name="stockNumber">
+        <input type="text" name="stockNumber" title="Ingrese el número de inventario del item">
     </p>
     <p>
         <input type="submit" value="Registrar">

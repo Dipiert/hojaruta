@@ -3,14 +3,14 @@
 <head>
 	<title>Items en cada estado</title>
 	<meta charset="utf-8">
-	<meta author="Damián Rotta">
-	<meta description="Roadmap for Libraries - Reports">
+	<meta name="author" content="Damián Rotta">
+	<meta name="description" content="Roadmap for Libraries - Reports">
 </head>
 <body>
 	<form action="items_en_cada_estado.php" method="POST">
-		<input type="checkbox" name="type[]" value="browser">Mostrar en Navegador<br/>
-		<input type="checkbox" name="type[]" value="xls">Descargar archivo Excel<br/>
-		<input type="checkbox" name="type[]" value="pdf">Descargar archivo PDF<br/>
+		<input type="checkbox" name="type[]" value="browser" id="browser"><label for="browser">Mostrar en Navegador</label><br/>
+		<input type="checkbox" name="type[]" value="xls" id="xls"><label for="xls">Descargar archivo Excel</label><br/>
+		<input type="checkbox" name="type[]" value="pdf" id="pdf"><label for="pdf">Descargar archivo PDF</label><br/>
 		<input type="submit" value="Generar Informe">
 	</form>
 </body>
