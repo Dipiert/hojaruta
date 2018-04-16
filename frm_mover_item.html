@@ -26,15 +26,15 @@ include ('includes/login_required.php');
 <script type="text/javascript">
 
 $(document).keypress(function(e){
-	if(e.which == 13){
+	if(e.which === 13){
     	$('#searchStockNumber').click();
     }
 });
 
 $("#searchStockNumber").click(function() {
-	var stockNumber = $("#stockNumber").val();
+	const stockNumber = $("#stockNumber").val();
 	
-	var defStates = $.ajax({
+	const defStates = $.ajax({
 		type: 'GET',
 		url: 'ajax/get_estados.php',
 		async: false,
@@ -44,7 +44,7 @@ $("#searchStockNumber").click(function() {
 		}
 	});
 
-	var defBiblio = $.ajax({
+	const defBiblio = $.ajax({
 		url: 'ajax/buscar_inventario.php',
 		type: 'POST',
 		async: false,
@@ -56,28 +56,30 @@ $("#searchStockNumber").click(function() {
 
 	$.when(defStates,defBiblio).then(showResult);
 
-})
+});
 
 function showResult(defStates, defBiblio) {
-	biblioData = JSON.parse(defBiblio[0]);
+	var biblioData = JSON.parse(defBiblio[0]);
 	showBiblioData(biblioData['author'], biblioData['title']);	
 	showStates(JSON.parse(defStates[0]), biblioData['state']);	
 	$("#changeStatus").css("visibility", "visible");
 }
 
 function showBiblioData(author, title) {
-	$("#result").empty();
-	$("#result").append('<p>Autor: ' + author + '</p>');
-	$("#result").append('<p>Título: ' + title + '</p>');
+	let result = $("#result");
+    result.empty();
+    result.append('<p>Autor: ' + author + '</p>');
+    result.append('<p>Título: ' + title + '</p>');
 }
 
 function showStates(states, actualStatus) {
-	$("#result").append('<p>Estado Actual: ' + actualStatus + '</p>');
-	$("#result").append('Estado Nuevo:' + getStateOptions(states, actualStatus));
+	let result = $("#result");
+    result.append('<p>Estado Actual: ' + actualStatus + '</p>');
+	result.append('Estado Nuevo:' + getStateOptions(states, actualStatus));
 }
 
 function getStateOptions(states, actualStatus) {
-	var html = ""
+	let html = "";
 	html += "<select id='statesSelect'>";
 	html += makeStateOptions(states, actualStatus);	
 	html += "</select>";
@@ -85,10 +87,10 @@ function getStateOptions(states, actualStatus) {
 }
 
 function makeStateOptions(states, actualStatus) {
-	var html = "";
-	var statesKeys = Object.keys(states);
+	let html = "";
+	let statesKeys = Object.keys(states);
 	for (let stateKey of statesKeys) {
-		if (actualStatus != stateKey) {
+		if (actualStatus !== stateKey) {
 			html += "<option value='" + states[stateKey] +  "' >" + stateKey + "</option>";	
 		}
 	}
@@ -96,8 +98,8 @@ function makeStateOptions(states, actualStatus) {
 }
 
 $("#changeStatus").click(function() {
-	var newState = $('#statesSelect option:selected').val();
-	var stockNumber = $("#stockNumber").val();
+	const newState = $('#statesSelect option:selected').val();
+	const stockNumber = $("#stockNumber").val();
 	$.ajax({
 		url: 'ajax/actualizar_estados.php',
 		type: 'POST',

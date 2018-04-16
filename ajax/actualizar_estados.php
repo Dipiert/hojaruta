@@ -24,9 +24,8 @@ class State {
     	$execResult = $stmt->execute(array(':id_estado' => $newState, ':nro_inventario' => $stockNumber));
     	if ($execResult) {
     		return $this->storeMovement();
-    	} else {
-    		echo "Ha ocurrido un error";
     	}
+    	return "Ha ocurrido un error";
 	}
 
 	function isValidResponsible($responsible) {
@@ -75,9 +74,7 @@ class State {
 			$row = $stmt->fetch();
 			return $row['id'];	
 		}
-		else {
-			echo "Ha ocurrido un error con el usuario";
-		}
+		return "Ha ocurrido un error con el usuario";
 	}
 
 	function getIdState($oldState) {
@@ -104,6 +101,5 @@ class State {
 	function getFecha() {
 		return date('Y-m-d');	
 	}
-
 }
 
