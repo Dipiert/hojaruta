@@ -11,7 +11,7 @@ class User {
 	}
 
 	function store() {
-		$sql = "INSERT INTO usuarios(id, usuario, contrasena, admin, creado_el) VALUES(null, ?, ?, ?, null)";
+		//$sql = "INSERT INTO usuarios(id, usuario, contrasena, admin, creado_el) VALUES(null, ?, ?, ?, null)";
 		
 	}
 }

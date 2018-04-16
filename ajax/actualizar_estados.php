@@ -23,7 +23,7 @@ class State {
     	$stmt = $this->conn->prepare($sql);
     	$execResult = $stmt->execute(array(':id_estado' => $newState, ':nro_inventario' => $stockNumber));
     	if ($execResult) {
-    		return $this->storeMovement();
+    		$this->storeMovement();
     	}
     	return "Ha ocurrido un error";
 	}
@@ -43,16 +43,14 @@ class State {
 			$idResponsible = $this->getIdResponsible($responsible);
 			$oldState = $_POST['oldState'];
 			$idOldState = $this->getIdState($oldState);
-			if ($idOldState === false) {
-				return "No puedo seguir";
-			} else {
+			if ($idOldState !== false) {
 				$stockNumber = $_POST['stockNumber'];
 				$actualState = $_POST['newState'];
 				$fecha = $this->getFecha();
 				$sql = "INSERT INTO movimientos(id_responsable, fecha, nro_inventario, id_estado_anterior, id_estado_nuevo) VALUES(?, ?, ?, ?, ?)";
 				$stmt = $this->conn->prepare($sql);
                 try {
-         			$execResult = $stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
+         			$stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
       			} catch (PDOException $e) {
       				if ($e->errorInfo[1] === 1062) {
       					echo "Cuidado: El movimiento que intenta llevar a cabo para ese número de item ya fue realizado hoy y no se registrará.";
@@ -74,7 +72,7 @@ class State {
 			$row = $stmt->fetch();
 			return $row['id'];	
 		}
-		return "Ha ocurrido un error con el usuario";
+		return 'Ha ocurrido un error con el usuario';
 	}
 
 	function getIdState($oldState) {

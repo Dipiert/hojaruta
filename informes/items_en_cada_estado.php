@@ -12,7 +12,5 @@ for ($i=0; $i < count($types); $i++) {
 
 function makeBrowserReport() {
 	require_once('BrowserReportHandler.php');
-	$brh = new BrowserReportHandler;
+	//$brh = new BrowserReportHandler;
 }
-
-?>

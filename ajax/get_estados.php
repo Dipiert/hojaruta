@@ -21,7 +21,7 @@ class State {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $this->prepareResponse($rows);
         } else {
-            return $conn->error;
+            return $this->conn->error;
         }   
     }
 
