@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a9bdc8f-ec5d-4604-b85a-510844c811cc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax/actualizar_estados.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax/actualizar_estados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax/buscar_inventario.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax/buscar_inventario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax/get_estados.php" beforeDir="false" afterPath="$PROJECT_DIR$/ajax/get_estados.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/DBController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/DBController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/SessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/SessionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frm_mover_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/frm_mover_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frm_registrar_item.php" beforeDir="false" afterPath="$PROJECT_DIR$/frm_registrar_item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/login_required.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/login_required.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/informes/BrowserReportHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/informes/BrowserReportHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/informes/frm_items_en_cada_estado.html" beforeDir="false" afterPath="$PROJECT_DIR$/informes/frm_items_en_cada_estado.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/informes/items_en_cada_estado.php" beforeDir="false" afterPath="$PROJECT_DIR$/informes/items_en_cada_estado.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/informes/listar_informes.php" beforeDir="false" afterPath="$PROJECT_DIR$/informes/listar_informes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/dql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/dql.sql" afterDir="false" />
-    </list>
+    <list default="true" id="9a9bdc8f-ec5d-4604-b85a-510844c811cc" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,8 +23,8 @@
       <file leaf-file-name="frm_items_en_cada_estado.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/informes/frm_items_en_cada_estado.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+            <state relative-caret-position="240">
+              <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -113,11 +92,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="22" />
-    <option name="y" value="44" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="399" />
+    <option name="y" value="72" />
     <option name="width" value="1344" />
-    <option name="height" value="724" />
+    <option name="height" value="696" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -173,15 +152,16 @@
       <workItem from="1523880501387" duration="213000" />
       <workItem from="1523880863893" duration="893000" />
       <workItem from="1523881864124" duration="210000" />
-      <workItem from="1523882106350" duration="266000" />
+      <workItem from="1523882106350" duration="862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1582000" />
+    <option name="totallyTimeSpent" value="2178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1366" height="772" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -361,8 +341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/informes/frm_items_en_cada_estado.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        <state relative-caret-position="240">
+          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
         </state>
       </provider>
     </entry>
