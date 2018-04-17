@@ -27,8 +27,24 @@
 		}
 		?>
 	</select>
+    <button id="passRestore">Restablecer contraseña</button>
+    <input type="checkbox" id="isAdmin"/><label for="isAdmin">Tiene permisos de administrador</label>
 </body>
 </html>
 <script type="text/javascript">
-$(".chosen-select").chosen();
+$(".chosen-select").chosen({
+    width: "20%"
+});
+
+$("#passRestore").click(function() {
+    $.ajax({
+       url: '../ajax/restaurar_contrasena.php',
+       success: function(data) {
+           console.log(data);
+       },
+       error: function(e) {
+           console.log(e);
+       }
+    });
+});
 </script>

@@ -79,8 +79,6 @@ class State {
 		defined('INVALID_STATE') || define('INVALID_STATE', -1);
 		$sql = "SELECT id FROM estado WHERE estado LIKE :estado collate utf8_general_ci";
 		$stmt = $this->conn->prepare($sql);		
-		//$stmt->bindParam(':estado', $oldState, PDO::PARAM_STR);
-		//var_dump($stmt);
 		$execResult = $stmt->execute(array(':estado' => $oldState));
 		if ($execResult) {		
 			$row = $stmt->fetch();

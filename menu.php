@@ -20,6 +20,7 @@ if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
     <a href="admin/states_abm.php">Gestionar Estados</a>
     <a href="admin/users_abm.php">Gestionar Usuarios</a>
    <?php } ?>
+   <a href="frm_cambiar_contrasena.php">Cambiar mi Contraseña</a>
    <form method="post">
 		<input type='submit' value='Cerrar Sesión' name='logout'>
    </form>

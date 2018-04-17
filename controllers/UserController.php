@@ -13,8 +13,6 @@ class UserController {
 		$this->db = new DBController();
 		$this->conn = $this->db->getConnection();
 		$this->session = new SessionController();
-		/*$this->user = $user;
-		$this->password = $password;*/
 	}
 
 	public function setUser($user) {
