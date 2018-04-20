@@ -6,6 +6,9 @@
  * Time: 9:45
  */
 
+if ($_POST["newPassword"]) {
+    echo "Recibi una nueva pass";
+}
 ?>
 
 <html>
@@ -17,6 +20,7 @@
             <label for="newPassword">Nueva contraseña:
                 <input type="text" id="newPassword" title="Ingrese la nueva contraseña"/>
             </label>
+            <input type="submit" value="Cambiar"/>
         </form>
     </body>
 </html>

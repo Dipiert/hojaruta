@@ -17,7 +17,7 @@
 </head>
 <body>
 
-	<select class="chosen-select" title="Seleccione un usuario">
+	<select class="chosen-select" title="Seleccione un usuario" id="usuarios">
 		<?php
 		require_once(dirname(__FILE__) . "/../controllers/UserController.php");
 		$user = new UserController();
@@ -36,11 +36,17 @@ $(".chosen-select").chosen({
     width: "20%"
 });
 
+
+
 $("#passRestore").click(function() {
+    const e = document.getElementById("usuarios");
+    const strUser = e.options[e.selectedIndex].value;
     $.ajax({
        url: '../ajax/restaurar_contrasena.php',
+       type: 'POST',
+       data: {'user': strUser},
        success: function(data) {
-           console.log(data);
+           alert("La nueva contraseña del usuario " + strUser + " es " + data);
        },
        error: function(e) {
            console.log(e);
