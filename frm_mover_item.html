@@ -59,7 +59,8 @@ $("#searchStockNumber").click(function() {
 });
 
 function showResult(defStates, defBiblio) {
-	var biblioData = JSON.parse(defBiblio[0]);
+    console.log(defBiblio[0]);
+	biblioData = JSON.parse(defBiblio[0]);
 	showBiblioData(biblioData['author'], biblioData['title']);	
 	showStates(JSON.parse(defStates[0]), biblioData['state']);	
 	$("#changeStatus").css("visibility", "visible");

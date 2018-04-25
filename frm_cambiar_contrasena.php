@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: desarrollo
- * Date: 17/04/18
- * Time: 9:45
- */
 
 if ($_POST["newPassword"]) {
     echo "Recibi una nueva pass";

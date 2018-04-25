@@ -1,7 +1,7 @@
 <?php 
 
-include ('../includes/login_required.php');
-require_once("../controllers/DBController.php");
+include ( dirname(__FILE__) .  '/../includes/login_required.php');
+require_once(dirname(__FILE__) . '/../controllers/DBController.php');
 $state = new State();
 echo $state->updateState();
 
@@ -24,8 +24,9 @@ class State {
     	$execResult = $stmt->execute(array(':id_estado' => $newState, ':nro_inventario' => $stockNumber));
     	if ($execResult) {
     		$this->storeMovement();
-    	}
-    	return "Ha ocurrido un error";
+    	} else {
+            return "Ha ocurrido un error al actualizar el estado";
+        }
 	}
 
 	function isValidResponsible($responsible) {

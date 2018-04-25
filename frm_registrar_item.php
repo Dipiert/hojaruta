@@ -2,9 +2,6 @@
 <!-- BREADCRUMBS -->
 <?php
 
-
-http://localhost/hojaruta/frm_registrar_item.php
-
 include('includes/login_required.php');
 require_once(dirname(__FILE__) . '/models/Item.php');
 

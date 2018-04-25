@@ -29,21 +29,24 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" type="text/css" href="assets/styles/style.css"/>
 </head>
 <body>
-<form action="index.php" method="POST">
-	<p>
-		<label>Usuario:</label>
-		<input type="text" name="user" title="Ingrese su usuario" required>
-	</p>
-	<p>
-		<label>Contraseña:</label>
-		<input type="password" name="password" title="Ingrese su contraseña" required>
-	</p>
-	<p>
-		<input type="submit" id="sendLoginData" value="Ingresar">
-	</p>
-
-</form>
+<div class="login-box">
+    <img src="assets/images/avatar.png" class="avatar">
+    <form action="index.php" method="POST">
+        <p>
+            <label>Usuario:</label>
+            <input type="text" name="user" title="Ingrese su usuario" required>
+        </p>
+        <p>
+            <label>Contraseña:</label>
+            <input type="password" name="password" title="Ingrese su contraseña" required>
+        </p>
+        <p>
+            <input type="submit" id="sendLoginData" value="Ingresar">
+        </p>
+    </form>
+</div>
 </body>
 </html>

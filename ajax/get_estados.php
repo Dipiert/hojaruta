@@ -1,7 +1,7 @@
 <?php
 
-include ('../includes/login_required.php');
-require_once("../controllers/DBController.php");
+include (dirname(__FILE__) . '/../includes/login_required.php');
+require_once(dirname(__FILE__) . '/../controllers/DBController.php');
 $state = new State();
 echo $state->getStates();
 
