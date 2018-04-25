@@ -39,15 +39,15 @@ function areFieldsSent() {
 <form action="frm_registrar_item.php" method="POST">
     <p>
         <label>Autor: </label>
-        <input type="text" name="author" title="Ingrese el nombre y apellido del autor">
+        <input type="text" name="author" title="Ingrese el nombre y apellido del autor" required>
     </p>
     <p>
         <label>Título: </label>
-        <input type="text" name="title" title="Ingrese el título del item">
+        <input type="text" name="title" title="Ingrese el título del item" required>
     </p>
     <p>
         <label>Inventario:</label>
-        <input type="text" name="stockNumber" title="Ingrese el número de inventario del item">
+        <input type="text" name="stockNumber" title="Ingrese el número de inventario del item" required>
     </p>
     <p>
         <input type="submit" value="Registrar">

@@ -18,7 +18,7 @@ if ($_POST["newPassword"]) {
     <body>
         <form>
             <label for="newPassword">Nueva contraseña:
-                <input type="text" id="newPassword" title="Ingrese la nueva contraseña"/>
+                <input type="text" id="newPassword" title="Ingrese la nueva contraseña" required/>
             </label>
             <input type="submit" value="Cambiar"/>
         </form>

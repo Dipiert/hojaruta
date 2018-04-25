@@ -34,11 +34,11 @@
 <form action="index.php" method="POST">
 	<p>
 		<label>Usuario:</label>
-		<input type="text" name="user" title="Ingrese su usuario">
+		<input type="text" name="user" title="Ingrese su usuario" required>
 	</p>
 	<p>
 		<label>Contraseña:</label>
-		<input type="password" name="password" title="Ingrese su contraseña">
+		<input type="password" name="password" title="Ingrese su contraseña" required>
 	</p>
 	<p>
 		<input type="submit" id="sendLoginData" value="Ingresar">
