@@ -12,5 +12,12 @@ for ($i=0; $i < count($types); $i++) {
 
 function makeBrowserReport() {
 	require_once('BrowserReportHandler.php');
-	//$brh = new BrowserReportHandler;
+	require_once(dirname(__FILE__) . "/../models/State.php");
+	$modelState = new State();
+	$states = $modelState->getStates();
+	//$counts = $itemStates->getAllCounts();
+	foreach($states as $state) {
+		echo $state['estado'] . "<br />";
+    }
+
 }

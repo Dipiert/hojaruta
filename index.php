@@ -32,16 +32,17 @@
     <link rel="stylesheet" type="text/css" href="assets/styles/style.css"/>
 </head>
 <body>
+<h1 class="title">Hoja de ruta BPM</h1>
 <div class="login-box">
     <img src="assets/images/avatar.png" class="avatar">
     <form action="index.php" method="POST">
         <p>
-            <label>Usuario:</label>
-            <input type="text" name="user" title="Ingrese su usuario" required>
+            <label>Usuario</label>
+            <input type="text" name="user" title="Ingrese su usuario" required placeholder="Ingrese su usuario">
         </p>
         <p>
-            <label>Contraseña:</label>
-            <input type="password" name="password" title="Ingrese su contraseña" required>
+            <label>Contraseña</label>
+            <input type="password" name="password" title="Ingrese su contraseña" required placeholder="Ingrese su contraseña">
         </p>
         <p>
             <input type="submit" id="sendLoginData" value="Ingresar">
