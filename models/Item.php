@@ -36,4 +36,26 @@ class Item {
             echo $e->getMessage();//"El número de inventario que intenta registrar ya está asociado a un Item.";
         }
 	}
+
+	public function getAllCounts() {
+        $sql = "SELECT estado, COUNT(estado) as cantidad FROM estado_item ei, estado e WHERE ei.id_estado=e.id GROUP BY id_estado";
+        return $this->getRows($sql);
+    }
+
+    public function getItemsForEachState() {
+        $sql = "SELECT estado, nro_inventario FROM estado_item ei, estado e WHERE e.id=ei.id_estado ORDER BY id_estado";
+        return $this->getRows($sql);
+    }
+
+    private function getRows($sql){
+        $stmt = $this->conn->prepare($sql);
+        if ($stmt->execute()) {
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $rows;
+        }
+    }
+
+
+
+
 }

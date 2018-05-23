@@ -2,10 +2,10 @@
 -- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 15-03-2018 a las 12:06:53
--- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
--- Versión de PHP: 7.1.12-1+ubuntu16.04.1+deb.sury.org+1
+-- Host: localhost
+-- Generation Time: May 23, 2018 at 10:18 AM
+-- Server version: 5.7.22-0ubuntu0.16.04.1
+-- PHP Version: 7.1.17-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,24 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `hojaruta`
+-- Database: `hojaruta`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `autores`
---
-
-CREATE TABLE `autores` (
-  `id` smallint(5) UNSIGNED NOT NULL,
-  `autor` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estado`
+-- Table structure for table `estado`
 --
 
 CREATE TABLE `estado` (
@@ -45,7 +34,7 @@ CREATE TABLE `estado` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estado_item`
+-- Table structure for table `estado_item`
 --
 
 CREATE TABLE `estado_item` (
@@ -56,19 +45,20 @@ CREATE TABLE `estado_item` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `item`
+-- Table structure for table `item`
 --
 
 CREATE TABLE `item` (
-  `autor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `autor` varchar(35) COLLATE utf8_spanish_ci NOT NULL,
   `titulo` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
-  `nro_inventario` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+  `nro_inventario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `creado_el` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `movimientos`
+-- Table structure for table `movimientos`
 --
 
 CREATE TABLE `movimientos` (
@@ -82,82 +72,78 @@ CREATE TABLE `movimientos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
   `id` tinyint(3) UNSIGNED ZEROFILL NOT NULL,
   `usuario` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `contrasena` varchar(32) COLLATE utf8_spanish_ci NOT NULL
+  `contrasena` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `creado_el` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `autores`
---
-ALTER TABLE `autores`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `estado`
+-- Indexes for table `estado`
 --
 ALTER TABLE `estado`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `estado_item`
+-- Indexes for table `estado_item`
 --
 ALTER TABLE `estado_item`
   ADD PRIMARY KEY (`nro_inventario`),
   ADD KEY `id_estado` (`id_estado`);
 
 --
--- Indices de la tabla `item`
+-- Indexes for table `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`nro_inventario`);
 
 --
--- Indices de la tabla `movimientos`
+-- Indexes for table `movimientos`
 --
 ALTER TABLE `movimientos`
-  ADD PRIMARY KEY (`id_responsable`,`nro_inventario`,`id_estado_anterior`,`id_estado_nuevo`),
+  ADD PRIMARY KEY (`id_responsable`,`fecha`,`nro_inventario`,`id_estado_anterior`,`id_estado_nuevo`),
   ADD KEY `id_responsable` (`id_responsable`),
   ADD KEY `nro_inventario` (`nro_inventario`),
   ADD KEY `id_estado_anterior` (`id_estado_anterior`),
   ADD KEY `id_estado_nuevo` (`id_estado_nuevo`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` tinyint(3) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `estado_item`
+-- Constraints for table `estado_item`
 --
 ALTER TABLE `estado_item`
   ADD CONSTRAINT `estado_item_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id`),
   ADD CONSTRAINT `estado_item_ibfk_2` FOREIGN KEY (`nro_inventario`) REFERENCES `item` (`nro_inventario`);
 
 --
--- Filtros para la tabla `movimientos`
+-- Constraints for table `movimientos`
 --
 ALTER TABLE `movimientos`
   ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`id_responsable`) REFERENCES `usuarios` (`id`),
