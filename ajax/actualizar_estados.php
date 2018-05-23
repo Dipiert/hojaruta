@@ -32,7 +32,7 @@ class State {
 	function isValidResponsible($responsible) {
 		$isValid = true;
 		if (is_null($responsible)){
-			echo "Ha ocurrido un error con la sesión";
+			echo "<script type='text/javascript'>alert(\"Ha ocurrido un error con la sesión\")</script>";
 			$isValid = false;
 		}
 		return $isValid;
@@ -54,14 +54,14 @@ class State {
          			$stmt->execute(array($idResponsible, $fecha, $stockNumber, $idOldState, $actualState));
       			} catch (PDOException $e) {
       				if ($e->errorInfo[1] === 1062) {
-      					echo "Cuidado: El movimiento que intenta llevar a cabo para ese número de item ya fue realizado hoy y no se registrará.";
+      					echo "<script type='text/javascript'>alert(\"Cuidado: El movimiento que intenta llevar a cabo para ese número de item ya fue realizado hoy y no se registrará.\")</script>";
       				} else {
       					echo $e->getMessage();
       				}
       			}
 			}			
 		} else {
-			echo "Ha ocurrido un error al obtener el responsable del movimiento";
+			echo "<script type='text/javascript'>alert(\"Ha ocurrido un error al obtener el responsable del movimiento\")</script>";
 		}	
 	}
 

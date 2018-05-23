@@ -25,12 +25,12 @@ class Item {
                 $stmt = $this->conn->prepare($sql);
                 $execResult = $stmt->execute(array($stockNumber));
                 if ($execResult) {
-                    echo "Exito";
+                    echo "<script type='text/javascript'>alert(\"Se ha agregado un item exitosamente\")</script>";
                 } else {
-                    echo "Ha ocurrido un error al registrar el estado inicial del item";
+                    echo "<script type='text/javascript'>alert(\"Ha ocurrido un error al registrar el estado inicial del item\")<script>";
                 }
             } else {
-                echo "Ha ocurrido un error al insertar el item";
+                echo "<script type='text/javascript'>alert(\"Ha ocurrido un error al insertar el item\")</script>";
             }
         } catch(PDOException $e) {
             echo $e->getMessage();//"El número de inventario que intenta registrar ya está asociado a un Item.";

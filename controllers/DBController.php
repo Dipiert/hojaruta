@@ -10,7 +10,7 @@ class DBController {
            try {
                $this->connection = new PDO($dsn, $conf['user'], $conf['password'], $conf['options']);
            } catch (PDOException $e) {
-               echo 'Falló la conexión: ' . $e->getMessage();
+               echo "<script type='text/javascript'>alert(\"Falló la conexión: " . $e->getMessage() . "\")</script>";
            }
            $this->connection->exec("set names utf8");
        } else {

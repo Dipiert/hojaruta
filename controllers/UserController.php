@@ -51,13 +51,13 @@ class UserController {
 					$home = 'menu.php';
 					header('Location: '. $home);
 				} else {
-					echo "Nombre de usuario y/o contraseña incorrecta";
+					echo "<script type='text/javascript'>alert(\"Nombre de usuario y/o contraseña incorrecta\")</script>";
 				}
 			} else {
 				echo $this->conn->error;
 			}
 		} else {
-			echo "Login incorrecto";
+			echo "<script type='text/javascript'>alert(\"Datos de login incorrectos\")</script>";
 		}
 	}
 
