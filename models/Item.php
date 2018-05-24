@@ -31,11 +31,15 @@ class Item {
             }
         } catch(PDOException $e) {
             $msg = $e->getMessage();
-            if ($e->errorInfo[1] === 1062) {
-                $msg = "El número de inventario que intenta registrar ya está asociado a un Item";
-            }
-            if ($e->errorInfo[1] === 1452) {
-                $msg = "Asegúrese de tener registrados los estados posibles del item en la DB";
+            switch($e->errorInfo[1]) {
+                case 1062:
+                    $msg = "El número de inventario que intenta registrar ya está asociado a un Item";
+                    break;
+                case 1452:
+                    $msg = "Asegúrese de tener registrados los estados posibles del item en la DB";
+                    break;
+                default:
+                    $msg = $e->getMessage();
             }
             echo "<script type='text/javascript'>alert('" . $msg . "')</script>";
         }
