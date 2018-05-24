@@ -34,6 +34,9 @@ class Item {
             if ($e->errorInfo[1] === 1062) {
                 $msg = "El número de inventario que intenta registrar ya está asociado a un Item";
             }
+            if ($e->errorInfo[1] === 1452) {
+                $msg = "Asegúrese de tener registrados los estados posibles del item en la DB";
+            }
             echo "<script type='text/javascript'>alert('" . $msg . "')</script>";
         }
 	}
