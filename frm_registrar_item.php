@@ -1,4 +1,4 @@
-<a href="./../menu.php">Menú Principal</a> / Registrar Item
+<a href="menu.php">Menú Principal</a> / Registrar Item
 <!-- BREADCRUMBS -->
 <?php
 

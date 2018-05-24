@@ -9,10 +9,12 @@ class DBController {
            $dsn = $conf["db_engine"] . ":host=" . $conf["host"] . ";dbname=" . $conf["dbname"];
            try {
                $this->connection = new PDO($dsn, $conf['user'], $conf['password'], $conf['options']);
+               $this->connection->exec("set names utf8");
            } catch (PDOException $e) {
                echo "<script type='text/javascript'>alert(\"Falló la conexión: " . $e->getMessage() . "\")</script>";
+               $this->connection->close();
            }
-           $this->connection->exec("set names utf8");
+
        } else {
            return getConnection();
        }

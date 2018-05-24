@@ -24,16 +24,17 @@ class Item {
                 $sql = "INSERT INTO estado_item (nro_inventario, id_estado) VALUES (?, 0)";
                 $stmt = $this->conn->prepare($sql);
                 $execResult = $stmt->execute(array($stockNumber));
-                if ($execResult) {
-                    echo "<script type='text/javascript'>alert(\"Se ha agregado un item exitosamente\")</script>";
-                } else {
-                    echo "<script type='text/javascript'>alert(\"Ha ocurrido un error al registrar el estado inicial del item\")<script>";
-                }
+                $msg = $execResult? "Se ha agregado un item exitosamente" : "Ha ocurrido un error al registrar el estado inicial del item";
+                echo "<script type='text/javascript'>alert('" . $msg . "')</script>";
             } else {
                 echo "<script type='text/javascript'>alert(\"Ha ocurrido un error al insertar el item\")</script>";
             }
         } catch(PDOException $e) {
-            echo $e->getMessage();//"El número de inventario que intenta registrar ya está asociado a un Item.";
+            $msg = $e->getMessage();
+            if ($e->errorInfo[1] === 1062) {
+                $msg = "El número de inventario que intenta registrar ya está asociado a un Item";
+            }
+            echo "<script type='text/javascript'>alert('" . $msg . "')</script>";
         }
 	}
 
