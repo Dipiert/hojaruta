@@ -14,6 +14,9 @@ include ('includes/login_required.php');
     </script>
 </head>
 <body>
+<div class="breadcrumbs">
+    <a href="menu.php">Menú Principal</a> / Mover Item</body> <br /><br />
+</div>
 		<label>Nro de Inventario:</label>
 		<input type="text" id="stockNumber" title="Ingrese Nro. Inventario" required>
 		<button type="submit" id="searchStockNumber">Buscar</button>

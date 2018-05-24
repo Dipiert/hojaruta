@@ -9,6 +9,9 @@ include ('../includes/login_required.php');
     <?php include('../includes/header.php') ?>
 </head>
 <body>
+<div class="breadcrumbs">
+    <a href="../menu.php">Menú Principal</a> / Listar Informes</body> <br /><br />
+</div>
     <form action="frm_tipo_reporte.php" method="POST">
         <input type="hidden" name="title" value="Cant de Items en cada estado">
         <input type="hidden" name="report_name" value="cant_items_en_cada_estado">

@@ -5,9 +5,9 @@
     <?php include('includes/header.php') ?>
 </head>
 <body>
-<!-- BREADCRUMBS -->
-<a href="menu.php">Menú Principal</a> / Registrar Item
-<!-- END BREADCRUMBS -->
+<div class="breadcrumbs">
+    <a href="menu.php">Menú Principal</a> / Registrar Item
+</div>
 <form action="frm_registrar_item.php" method="POST">
     <p>
         <label>Autor: </label>
