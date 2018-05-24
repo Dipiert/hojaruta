@@ -3,9 +3,7 @@
 <html>
 <head>
     <title><?php echo $_POST['title'] ?></title>
-    <meta charset="utf-8">
-    <meta name="author" content="Damián Rotta">
-    <meta name="description" content="Roadmap for Libraries - Reports">
+    <?php include('includes/header.php') ?>
 </head>
 <body>
 <form action='<?php echo $_POST['report_name']?>.php' method="POST">

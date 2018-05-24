@@ -1,5 +1,32 @@
-<a href="menu.php">Menú Principal</a> / Registrar Item
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrar item</title>
+    <?php include('includes/header.php') ?>
+</head>
+<body>
 <!-- BREADCRUMBS -->
+<a href="menu.php">Menú Principal</a> / Registrar Item
+<!-- END BREADCRUMBS -->
+<form action="frm_registrar_item.php" method="POST">
+    <p>
+        <label>Autor: </label>
+        <input type="text" name="author" title="Ingrese el nombre y apellido del autor" required>
+    </p>
+    <p>
+        <label>Título: </label>
+        <input type="text" name="title" title="Ingrese el título del item" required>
+    </p>
+    <p>
+        <label>Inventario:</label>
+        <input type="text" name="stockNumber" title="Ingrese el número de inventario del item" required>
+    </p>
+    <p>
+        <input type="submit" value="Registrar">
+    </p>
+</form>
+</body>
+</html>
 <?php
 
 include('includes/login_required.php');
@@ -25,30 +52,3 @@ function areFieldsSent() {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrar item</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Roadmap for Libraries">
-</head>
-<body>
-<form action="frm_registrar_item.php" method="POST">
-    <p>
-        <label>Autor: </label>
-        <input type="text" name="author" title="Ingrese el nombre y apellido del autor" required>
-    </p>
-    <p>
-        <label>Título: </label>
-        <input type="text" name="title" title="Ingrese el título del item" required>
-    </p>
-    <p>
-        <label>Inventario:</label>
-        <input type="text" name="stockNumber" title="Ingrese el número de inventario del item" required>
-    </p>
-    <p>
-        <input type="submit" value="Registrar">
-    </p>
-</form>
-</body>
-</html>

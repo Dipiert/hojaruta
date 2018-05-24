@@ -8,6 +8,7 @@ if ($_POST["newPassword"]) {
 <html>
     <head>
         <title>Cambiar mi contraseña</title>
+        <?php include('includes/header.php') ?>
     </head>
     <body>
         <form>

@@ -11,10 +11,11 @@ if (isset($_POST['logout']) && $_POST['logout'] == "Cerrar Sesión") {
 <html>
 <head>
    <title>Menú Principal</title>
+    <?php include('includes/header.php') ?>
 </head>
 <body>
    <a href="frm_registrar_item.php">Ingresar Item</a>
-   <a href="frm_mover_item.html">Mover Item</a>
+   <a href="frm_mover_item.php">Mover Item</a>
    <a href="informes/listar_informes.php">Informes</a>
    <?php if ($_SESSION["admin"] === 1) { ?>  
     <a href="admin/states_abm.php">Gestionar Estados</a>

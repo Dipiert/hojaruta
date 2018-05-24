@@ -6,9 +6,7 @@ include ('../includes/login_required.php');
 <html>
 <head>
 	<title>Listar Informes</title>
-	<meta charset="utf-8">
-	<meta name="description" content="Hoja de Ruta - Listar Informes">
-	<meta author="Damián Rotta">
+    <?php include('../includes/header.php') ?>
 </head>
 <body>
     <form action="frm_tipo_reporte.php" method="POST">

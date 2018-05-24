@@ -6,8 +6,7 @@ include ('includes/login_required.php');
 <html>
 <head>
 	<title>Mover Item</title>
-	<meta charset="utf-8">
-    <meta name="description" content="Roadmap for Libraries">
+    <?php include('includes/header.php') ?>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

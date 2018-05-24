@@ -21,9 +21,7 @@
 <html>
 <head>
 	<title>Inicio de Sesión</title>
-	<meta charset="utf-8">
-	<meta name="description" content="Hoja de Ruta - Login">
-	<meta name="author" content="Damián Rotta">
+    <?php include('includes/header.php') ?>
 	<script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
