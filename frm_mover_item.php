@@ -111,7 +111,9 @@ include ('includes/login_required.php');
                 alert(e);
             },
             success: function(data) {
-                alert(data);
+                if (!data) {
+                    alert("Se ha movido un item correctamente");
+                }
             }
         }).then(function() {
             location.reload();
