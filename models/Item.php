@@ -55,6 +55,10 @@ class Item {
         return $this->getRows($sql);
     }
 
+    public function getItemsMoved($desde, $hasta) {
+        $sql = "SELECT nro_inventario FROM item WHERE";
+    }
+
     private function getRows($sql){
         $stmt = $this->conn->prepare($sql);
         if ($stmt->execute()) {
