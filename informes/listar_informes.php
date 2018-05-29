@@ -27,8 +27,10 @@ include ('../includes/login_required.php');
         <input type="hidden" name="report_name" value="items_movidos_por_fecha">
         <input type="submit" value="Items movidos por fecha"/>
     </form>
-<p>
-	<a>Items movidos por responsable</a>
-<p>
+    <form action="frm_desde_hasta.php" method="POST">
+        <input type="hidden" name="title" value="Items movidos por responsable">
+        <input type="hidden" name="report_name" value="items_movidos_por_responsable">
+        <input type="submit" value="Items movidos por Responsable"/>
+    </form>
 </body>
 </html>

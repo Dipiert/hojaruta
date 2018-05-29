@@ -33,6 +33,16 @@ class Movement {
         return $this->getRows($sql);
     }
 
+    public function getItemsMovedByResponsible($desde, $hasta) {
+        $sql = "SELECT u.usuario as responsable, COUNT(nro_inventario) as total
+                FROM movimientos m INNER JOIN usuarios u ON u.id = m.id_responsable 
+                WHERE m.fecha BETWEEN \"$desde\" AND \"$hasta\" GROUP BY u.usuario";
+        return $this->getRows($sql);
+        //echo "<script>console.log('" . $sql .  "')</script>";
+        //return $this->getRows($sql);
+    }
+
+
     private function getRows($sql){
         $stmt = $this->conn->prepare($sql);
         if ($stmt->execute()) {

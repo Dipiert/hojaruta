@@ -40,5 +40,4 @@ function makeBrowserReport() {
         }
         makeHtmlEnd($table=1);
     }
-
 }

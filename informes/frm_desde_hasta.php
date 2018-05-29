@@ -28,7 +28,7 @@
     </script>
 </head>
 <body>
-<form action="items_movidos_por_fecha.php" method="post">
+<form action='<?php echo $_POST['report_name']?>.php' method="post">
     <p>Desde: <input type="text" name="desde" class="datepicker"></p>
     <p>Hasta: <input type="text" name="hasta" class="datepicker"></p>
     <input type="submit">
