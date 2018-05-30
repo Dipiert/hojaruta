@@ -55,8 +55,9 @@ class Item {
         return $this->getRows($sql);
     }
 
-    public function getItemsMoved($desde, $hasta) {
-        $sql = "SELECT nro_inventario FROM item WHERE";
+    public function getItemsCreated($desde, $hasta) {
+        $sql = "SELECT nro_inventario FROM item WHERE creado_el BETWEEN \"$desde\" AND \"$hasta\"";
+        return $this->getRows($sql);
     }
 
     private function getRows($sql){

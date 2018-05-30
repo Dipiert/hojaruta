@@ -22,7 +22,7 @@ function makeBrowserReport($desde, $hasta) {
     } else {
         echo "<table style='width=100%' border='1'>\n";
         echo "<tr>\n";
-        echo "<th>Items movidos</th>\n";
+        echo "<th>Nro. de inventarios movidos</th>\n";
         echo "</tr>\n";
         foreach($movements as $movement) {
             echo "<tr>\n";
