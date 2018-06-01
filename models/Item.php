@@ -75,4 +75,12 @@ class Item {
         }
     }
 
+    private function getRows($sql){
+         $stmt = $this->conn->prepare($sql);
+         if ($stmt->execute()) {
+             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+             return $rows;
+         }
+    }
+
 }
