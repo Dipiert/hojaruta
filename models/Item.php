@@ -15,6 +15,7 @@ class Item {
     }
 
 	public function storeItem($author, $title, $stockNumber) {
+
         $idResponsable = $this->getIdResponsibleFromUsername($_SESSION['username'])[0];
 		$this->item->prepareStrings([$author, $title, $stockNumber, $idResponsable]);
         $sql = "INSERT INTO item (autor, titulo, nro_inventario, creado_el, id_responsable) VALUES (?, ?, ?, ?, ?)";
@@ -32,7 +33,6 @@ class Item {
             }
         } catch(PDOException $e) {
             $msg = $e->getMessage();
-            var_dump($msg); die();
             switch($e->errorInfo[1]) {
                 case 1062:
                     $msg = "El número de inventario que intenta registrar ya está asociado a un Item";
@@ -40,6 +40,9 @@ class Item {
                 case 1452:
                     $msg = "Asegúrese de tener registrados los estados posibles del item en la DB";
                     break;
+                default:
+                    $msg = $e->getMessage();
+
             }
             echo "<script type='text/javascript'>alert('" . $msg . "')</script>";
         }
@@ -72,11 +75,4 @@ class Item {
         }
     }
 
-    private function getRows($sql){
-        $stmt = $this->conn->prepare($sql);
-        if ($stmt->execute()) {
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $rows;
-        }
-    }
 }
