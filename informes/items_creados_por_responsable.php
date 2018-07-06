@@ -17,13 +17,13 @@ function makeBrowserReport($desde, $hasta) {
     $movementModel = new Movement();
     $movements = $movementModel->getItemsMovedByResponsible($desde, $hasta);
     if (empty($movements)) {
-        echo "No hay movimientos hechos en esa fecha";
+        echo "No se dieron de alta nuevos items en esa fecha";
         makeHtmlEnd($table=0);
     } else {
         echo "<table style='width=100%' border='1'>\n";
         echo "<tr>\n";
         echo "<th>Responsable</th>\n";
-        echo "<th>Total items movidos</th>\n";
+        echo "<th>Total items creados</th>\n";
         echo "</tr>\n";
         foreach($movements as $movement) {
             echo "<tr>\n";
